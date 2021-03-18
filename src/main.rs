@@ -17,6 +17,7 @@ fn main() -> std::io::Result<()> {
   let mode_sleep = &"sleep".to_string();
   let mode_find = &"find".to_string();
   let mode_hide = &"hide".to_string();
+  let mode_update = &"update".to_string();
 
   if (&arg_len < &2) || (mode == mode_eat && &arg_len < &4) || (mode == mode_find && &arg_len < &3) {
     print_usage();
@@ -24,10 +25,9 @@ fn main() -> std::io::Result<()> {
 
   let f = std::path::Path::new("project.db").exists();
   let db = &db_init_init().unwrap();
-  println!("Proj does exist? {}", f);
+
   if mode == mode_wakeup || f == false {
     db_initialize(db);
-    println!("init");
   } else if mode == mode_eat {
     let path = &args[2];
     let name = &args[3];
@@ -42,6 +42,11 @@ fn main() -> std::io::Result<()> {
   } else if mode == mode_hide {
     // If you hide it twice it will add a 2nd line to .*ignore file
     hide_database();
+  } else if mode == mode_update {
+    let path = &args[2];
+    if db_check_if_proj_exists(db, path) {
+
+    }
   }
   Ok(())
 }

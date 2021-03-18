@@ -79,6 +79,29 @@ pub fn eat_path(db1: &Connection, path: &String, projname: &String) -> std::io::
 }
 
 pub fn eat_path_again(db1: &Connection, path: &String, projname: &String) -> std::io::Result<()> {
+  let projs: i32 = db_get_number_of_projects(db1);
+  db_insert_proj(db1, &projname.to_string(), &path.to_string());
+
+  for entry in WalkDir::new(path).into_iter() {
+    let entry = entry.unwrap();
+
+    let metadata = fs::metadata(entry.path().display().to_string())?;
+    let file_type = metadata.file_type();
+
+    if !file_type.is_dir() {
+      let mut f = File::open(entry.path().display().to_string())?;
+      let mut buffer = Vec::new();
+      f.read_to_end(&mut buffer)?;
+
+      let _contents = match str::from_utf8(&buffer) {
+        Ok(x) => {
+          db_insert_projdata(db1, &entry.path().display().to_string(), &x.to_string(), &projs);
+          x
+        },
+        Err(_e) => {"Something went wrong"},
+      };
+    }
+  }
   Ok(())
 }
 

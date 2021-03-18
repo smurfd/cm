@@ -327,6 +327,60 @@ pub fn db_get_project_name(db: &Connection, projid: &i32) -> String {
   r[0].name().to_string()
 }
 
+pub fn db_check_if_proj_exists(db: &Connection, projd: &String) -> bool {
+  let mut sel = String::new();
+  writeln!(&mut sel, "SELECT EXISTS(SELECT id FROM project WHERE projdata=\"{}\")", projd).unwrap();
+
+  let mut data = db.prepare(&sel).unwrap();
+  #[derive(Debug)]
+  struct Project {
+    pub id: i32,
+  }
+  impl Project {
+    pub fn id(&self) -> &i32 {
+      &self.id
+    }
+  }
+  let it = data.query_map(params![], |row| {
+    Ok(Project {id: row.get(0)?})
+  }).unwrap();
+
+  let mut r = Vec::new();
+  for r_r in it {
+    r.push(r_r.unwrap());
+  }
+  if *r[0].id() == 1 {
+    true
+  } else {
+    false
+  }
+}
+
+pub fn db_get_project_id(db: &Connection, projname: &String) -> i32 {
+  let mut sel = String::new();
+  writeln!(&mut sel, "SELECT id FROM project where projname={}", projname).unwrap();
+
+  let mut data = db.prepare(&sel).unwrap();
+  #[derive(Debug)]
+  struct Project {
+    pub id: i32,
+  }
+  impl Project {
+    pub fn id(&self) -> &i32 {
+      &self.id
+    }
+  }
+  let it = data.query_map(params![], |row| {
+    Ok(Project {id: row.get(0)?})
+  }).unwrap();
+
+  let mut r = Vec::new();
+  for r_r in it {
+    r.push(r_r.unwrap());
+  }
+  *r[0].id()
+}
+
 pub fn db_get_file_name(db: &Connection, fileid: &i32) -> String {
   let mut sel = String::new();
   writeln!(&mut sel, "SELECT filename FROM projectdata where id={}", fileid).unwrap();
