@@ -40,3 +40,6 @@ pascal | FLOGGER/MAKEFILE | README INSTALLATION TODO OPTIMIZING Makefile bubble_
 
 ```
 still alot of things to add (aswell as the code :))
+
+
+
