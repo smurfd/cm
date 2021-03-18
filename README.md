@@ -41,4 +41,35 @@ pascal | FLOGGER/MAKEFILE | README INSTALLATION TODO OPTIMIZING Makefile bubble_
 ```
 still alot of things to add (aswell as the code :))
 
-More will come
+
+-- fresh install
+    Updating crates.io index
+   Compiling pkg-config v0.3.19
+   Compiling ahash v0.4.7
+   Compiling memchr v2.3.4
+   Compiling bitflags v1.2.1
+   Compiling fallible-iterator v0.2.0
+   Compiling fallible-streaming-iterator v0.1.9
+   Compiling smallvec v1.6.1
+   Compiling same-file v1.0.6
+   Compiling walkdir v2.3.1
+   Compiling hashbrown v0.9.1
+   Compiling libsqlite3-sys v0.20.1
+   Compiling hashlink v0.6.0
+   Compiling rusqlite v0.24.2
+
+--- nightly
+   Compiling pkg-config v0.3.19
+   Compiling bitflags v1.2.1
+   Compiling ahash v0.4.7
+   Compiling memchr v2.3.4
+   Compiling smallvec v1.6.1
+   Compiling fallible-iterator v0.2.0
+   Compiling fallible-streaming-iterator v0.1.9
+   Compiling same-file v1.0.6
+   Compiling walkdir v2.3.1
+   Compiling hashbrown v0.9.1
+   Compiling libsqlite3-sys v0.20.1
+   Compiling hashlink v0.6.0
+   Compiling rusqlite v0.24.2
+
