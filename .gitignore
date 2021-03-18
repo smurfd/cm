@@ -2,4 +2,4 @@ target/
 project.db
 Cargo.lock
 out.txt
-
+.hgignore
