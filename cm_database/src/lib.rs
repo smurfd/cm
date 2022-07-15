@@ -112,6 +112,14 @@ impl Selection {
     }
   }
 
+  pub fn id(&self) -> &i32 {
+    &self.id
+  }
+
+  pub fn row(&self) -> &i32 {
+    &self.row
+  }
+
   pub fn fid(&self) -> &i32 {
     &self.fid
   }
